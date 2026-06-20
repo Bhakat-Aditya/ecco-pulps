@@ -9,21 +9,27 @@ function Navbar() {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    // Fast, simple entrance animation so the navbar is immediately visible
-    gsap.from(navRef.current, {
-      y: -20,
-      opacity: 0,
-      duration: 0.6,
-      ease: "power2.out",
+    let mm = gsap.matchMedia();
+
+    mm.add("(min-width: 768px)", () => {
+      // Fast, simple entrance animation so the navbar is immediately visible on desktop
+      gsap.from(navRef.current, {
+        y: -20,
+        opacity: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      });
+
+      gsap.from(".nav-item", {
+        opacity: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        stagger: 0.1,
+        delay: 0.2
+      });
     });
 
-    gsap.from(".nav-item", {
-      opacity: 0,
-      duration: 0.8,
-      ease: "power2.out",
-      stagger: 0.1,
-      delay: 0.2
-    });
+    return () => mm.revert();
   }, { scope: containerRef });
 
   useEffect(() => {
@@ -50,10 +56,10 @@ function Navbar() {
       <nav
         ref={navRef}
         id="navbar"
-        className={`pointer-events-auto flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
+        className={`flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
           isScrolled 
-            ? "w-full max-w-4xl bg-forest/80 backdrop-blur-xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)] border border-white/10 rounded-full py-2.5 px-3 md:px-4" 
-            : "w-full max-w-7xl bg-transparent py-2 px-0"
+            ? "w-full max-w-4xl bg-forest/80 backdrop-blur-xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)] border border-white/10 rounded-full py-2.5 px-3 md:px-4 opacity-100 translate-y-0 pointer-events-auto" 
+            : "w-full max-w-7xl bg-transparent py-2 px-0 opacity-0 -translate-y-10 md:opacity-100 md:translate-y-0 pointer-events-none md:pointer-events-auto"
         }`}
       >
         {/* Brand */}
