@@ -97,11 +97,11 @@ function ContactUs() {
       }}
     >
       <div
-        className="absolute top-10 right-10 w-72 h-72 rounded-full opacity-[0.06]"
+        className="absolute top-10 -right-10 md:right-10 w-48 md:w-72 h-48 md:h-72 rounded-full opacity-[0.06] pointer-events-none"
         style={{ backgroundColor: "#4a7c59" }}
       />
       <div
-        className="absolute bottom-10 left-10 w-56 h-56 rounded-full opacity-[0.04]"
+        className="absolute bottom-10 -left-10 md:left-10 w-40 md:w-56 h-40 md:h-56 rounded-full opacity-[0.04] pointer-events-none"
         style={{ backgroundColor: "#c8a96e" }}
       />
 

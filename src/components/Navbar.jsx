@@ -9,23 +9,20 @@ function Navbar() {
   const containerRef = useRef(null);
 
   useGSAP(() => {
-    // Premium entrance animation
+    // Fast, simple entrance animation so the navbar is immediately visible
     gsap.from(navRef.current, {
-      y: -120,
-      opacity: 0,
-      duration: 1.8,
-      ease: "expo.out",
-      delay: 0.2
-    });
-
-    // Staggered entrance for internal elements
-    gsap.from(".nav-item", {
       y: -20,
       opacity: 0,
-      duration: 1.2,
-      ease: "power3.out",
+      duration: 0.6,
+      ease: "power2.out",
+    });
+
+    gsap.from(".nav-item", {
+      opacity: 0,
+      duration: 0.8,
+      ease: "power2.out",
       stagger: 0.1,
-      delay: 0.6
+      delay: 0.2
     });
   }, { scope: containerRef });
 
