@@ -1,0 +1,114 @@
+/* ============================================
+   Ecco Pulps — Global Stylesheet
+   Design System: Earthy, premium, sustainable
+   ============================================ */
+
+@import "tailwindcss";
+
+/* ------------------------------------------
+   Custom Design Tokens (Tailwind CSS v4)
+   ------------------------------------------ */
+@theme {
+  /* Colors — earthy, natural palette */
+  --color-forest: #1a3a2a;
+  --color-forest-light: #264d38;
+  --color-sage: #4a7c59;
+  --color-sage-light: #7fb069;
+  --color-kraft: #c8a96e;
+  --color-kraft-light: #e8d5b0;
+  --color-cream: #faf6f0;
+  --color-cream-dark: #f0e8d8;
+  --color-charcoal: #2c2c2c;
+  --color-charcoal-light: #555555;
+
+  /* Typography */
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+/* ------------------------------------------
+   Base / Reset Styles
+   Wrapped in @layer base so Tailwind utility
+   classes can properly override these defaults.
+   ------------------------------------------ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-charcoal);
+    background-color: var(--color-cream);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* Playfair headings feel — acts as a default,
+     but can be overridden by Tailwind's font-sans etc. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    color: var(--color-forest);
+    line-height: 1.2;
+  }
+
+  /* Remove Vite's default styles */
+  #root {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  /* Smooth image rendering */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Selection color for brand feel */
+  ::selection {
+    background-color: var(--color-sage-light);
+    color: white;
+  }
+}
+
+/* ------------------------------------------
+   Utility Animations (used by components)
+   ------------------------------------------ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(8px); }
+}
+
+@keyframes testimonial-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% / 3)); }
+}
+
+@layer utilities {
+  .animate-testimonial-scroll {
+    animation: testimonial-scroll 40s linear infinite;
+  }
+}
