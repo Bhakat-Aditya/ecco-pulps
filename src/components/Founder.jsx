@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import founderImg from "../assets/founder.png"; // Using a recent image as placeholder
+import founderImg from "../assets/founder.jpg"; // Using a recent image as placeholder
 
 function Founder() {
   const sectionRef = useRef(null);

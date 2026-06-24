@@ -2,24 +2,163 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+/* ─────────────────────────────────────────────
+   Real Google Reviews — All 5-star ⭐⭐⭐⭐⭐
+   ───────────────────────────────────────────── */
 const reviews = [
   {
-    name: "Rahul Gupta",
-    role: "User",
-    text: "Being in the food industry, I’ve been looking for sustainable packaging solutions. Ecco Pulps’ biodegradable packaging is both practical and environmentally friendly, helping my business go green while maintaining quality.",
+    name: "Atreyi",
+    text: "A wonderful service. Very prompt delivery. Good quality tissue. Designed with our co logo — Hassle free delivery.",
   },
   {
-    name: "Priya Desai",
-    role: "User",
-    text: "As a conscious consumer, I’ve been looking for eco-friendly alternatives, and I’m so glad I found Ecco Pulps. Their biodegradable tissues and packaging are of top quality, and it feels great knowing I'm using products that are kind to the Earth!",
+    name: "Abhishek Chakraborty",
+    text: "I've been using tissue from EccoPulps for a while now, and I can confidently say they've set a new standard in quality. Whether it's their facial tissues, kitchen rolls, or pocket packs, each product delivers a perfect balance of softness and strength.",
   },
   {
-    name: "Aarav Sharma",
-    role: "User",
-    text: "I recently switched to biodegradable packaging from Ecco Pulps, and I must say, it’s a game-changer! Not only are the tissues soft and strong, but I also feel proud that I’m doing my part for the environment.",
+    name: "Subham Singh",
+    text: "Exceptional Quality & Softness — Truly a Premium Product! I've tried many tissue paper brands over the years, but this one truly stands out.",
+  },
+  {
+    name: "Ankita Sen",
+    text: "Its so soft, its never irritate my skin, its absorb lots of liquid, I mean it, highly recommended.",
+  },
+  {
+    name: "Debnath Bhattacharjee",
+    text: "Best Quality tissues, happy to get associated with this brand.",
+  },
+  {
+    name: "Riya Mondal",
+    text: "Soo much soft & very good product. I love this tissues & reasonable prices.",
+  },
+  {
+    name: "Kuntal Sardar",
+    text: "Very good product and eco-friendly.",
+  },
+  {
+    name: "MD Asim Jabed Molla",
+    text: "Good quality and good product, very very beautiful product.",
+  },
+  {
+    name: "Sams Parvez",
+    text: "Good quality product with reasonable price.",
+  },
+  {
+    name: "Tania Bhakat",
+    text: "Quality tissues at its best price!",
+  },
+  {
+    name: "Puja Dey",
+    text: "Ultra soft and good quality tissue.",
+  },
+  {
+    name: "Arijit Bal",
+    text: "Very good quality.",
+  },
+  {
+    name: "Jayanta Mondal",
+    text: "Very good & best quality.",
+  },
+  {
+    name: "Jay Sengupta",
+    text: "Premium quality tissues with great service.",
+  },
+  {
+    name: "Dipankar Sardar",
+    text: "Very soft and good quality.",
+  },
+  {
+    name: "Piu Mondal",
+    text: "Very soft. Good product.",
+  },
+  {
+    name: "Raju Das",
+    text: "Very good product, good quality.",
+  },
+  {
+    name: "Answar Safui",
+    text: "Very good quality.",
+  },
+  {
+    name: "MD. Hasan Shaikh",
+    text: "Nice product.",
+  },
+  {
+    name: "Susmita Kar",
+    text: "Good quality, 100%.",
+  },
+  {
+    name: "Rakhibul Mondal",
+    text: "Tissue quality is very good.",
+  },
+  {
+    name: "Arnab Das",
+    text: "Great quality.",
+  },
+  {
+    name: "Soumen Das",
+    text: "Nice tissues and good product.",
+  },
+  {
+    name: "Poulami Chakraborty",
+    text: "Best quality.",
   },
 ];
 
+/* ─────────────────────────────────────────────
+   5-Star SVG (reusable)
+   ───────────────────────────────────────────── */
+const FiveStars = () => (
+  <div className="flex gap-0.5 text-sage-light mb-4">
+    {[...Array(5)].map((_, i) => (
+      <svg key={i} width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+      </svg>
+    ))}
+  </div>
+);
+
+/* ─────────────────────────────────────────────
+   Review Card
+   ───────────────────────────────────────────── */
+function ReviewCard({ review, setKey }) {
+  // Generate initials for the avatar
+  const initials = review.name
+    .split(" ")
+    .map((w) => w[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+
+  return (
+    <div
+      key={setKey}
+      className="w-[300px] md:w-[350px] flex-shrink-0 mx-3 bg-white/5 border border-white/10 rounded-2xl p-7 transition-colors duration-300 hover:bg-white/10"
+    >
+      <FiveStars />
+      <p className="text-cream/85 text-sm md:text-[15px] leading-relaxed mb-6">
+        "{review.text}"
+      </p>
+      <div className="flex items-center gap-3">
+        {/* Avatar with initials */}
+        <div className="w-9 h-9 rounded-full bg-sage/30 flex items-center justify-center text-[11px] font-sans font-bold text-cream tracking-wide">
+          {initials}
+        </div>
+        <div>
+          <h4 className="font-serif font-medium text-base text-cream leading-tight">
+            {review.name}
+          </h4>
+          <p className="text-[11px] text-sage-light/60 font-sans">
+            Google Review
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────────
+   Testimonials Section
+   ───────────────────────────────────────────── */
 function Testimonials() {
   const headingRef = useRef(null);
 
@@ -52,70 +191,26 @@ function Testimonials() {
           Testimonials
         </span>
         <h2 className="font-serif text-4xl md:text-5xl font-medium mb-4">
-          What they say about us
+          What Our Customers Say
         </h2>
-        <p className="text-cream/70 text-lg">
-          Checkout our latest reviews
+        <p className="text-cream/60 text-base md:text-lg font-sans">
+          Real reviews from real people — all 5-star ratings on Google
         </p>
       </div>
 
       {/* Infinite Auto-scrolling Marquee */}
       <div className="relative w-full overflow-hidden flex">
-        {/* We use a standard CSS animation for continuous sliding */}
         <div className="flex w-max animate-testimonial-scroll hover:[animation-play-state:paused]">
-          {/* First set of cards */}
-          {reviews.map((review, i) => (
-            <div key={`review-1-${i}`} className="w-[350px] md:w-[400px] flex-shrink-0 mx-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-colors hover:bg-white/10">
-              <div className="text-sage-light mb-4">
-                {/* 5 Stars */}
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              </div>
-              <p className="text-cream/90 text-lg leading-relaxed mb-8">"{review.text}"</p>
-              <div>
-                <h4 className="font-serif font-medium text-xl text-cream">{review.name}</h4>
-                <p className="text-sm text-sage-light">{review.role}</p>
-              </div>
-            </div>
-          ))}
-          
-          {/* Second set of cards (duplicate for infinite loop) */}
-          {reviews.map((review, i) => (
-            <div key={`review-2-${i}`} className="w-[350px] md:w-[400px] flex-shrink-0 mx-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-colors hover:bg-white/10">
-              <div className="text-sage-light mb-4">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              </div>
-              <p className="text-cream/90 text-lg leading-relaxed mb-8">"{review.text}"</p>
-              <div>
-                <h4 className="font-serif font-medium text-xl text-cream">{review.name}</h4>
-                <p className="text-sm text-sage-light">{review.role}</p>
-              </div>
-            </div>
-          ))}
-          {/* Third set of cards (duplicate for infinite loop to ensure no empty space on large screens) */}
-          {reviews.map((review, i) => (
-            <div key={`review-3-${i}`} className="w-[350px] md:w-[400px] flex-shrink-0 mx-4 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-colors hover:bg-white/10">
-              <div className="text-sage-light mb-4">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="inline-block mr-1"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              </div>
-              <p className="text-cream/90 text-lg leading-relaxed mb-8">"{review.text}"</p>
-              <div>
-                <h4 className="font-serif font-medium text-xl text-cream">{review.name}</h4>
-                <p className="text-sm text-sage-light">{review.role}</p>
-              </div>
-            </div>
-          ))}
+          {/* Three copies for seamless infinite loop */}
+          {[1, 2, 3].map((setNum) =>
+            reviews.map((review, i) => (
+              <ReviewCard
+                key={`review-${setNum}-${i}`}
+                review={review}
+                setKey={`review-${setNum}-${i}`}
+              />
+            ))
+          )}
         </div>
       </div>
     </section>
