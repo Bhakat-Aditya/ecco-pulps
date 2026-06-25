@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Leaf, Lightbulb, Sprout, Globe } from "lucide-react";
 import founderImg from "../assets/founder.jpg"; // Using a recent image as placeholder
 
 function Founder() {
@@ -65,27 +66,35 @@ function Founder() {
             
             <div className="space-y-6">
               <div className="flex gap-4 items-start">
-                <span className="text-2xl">🌿</span>
+                <span className="text-sage mt-1">
+                  <Leaf size={24} strokeWidth={1.5} />
+                </span>
                 <p className="text-charcoal font-serif italic text-lg leading-relaxed">
                   "Mr. Abhishek Bhakat — a visionary entrepreneur and the driving force behind Eccopulps, a brand redefining sustainability with every biodegradable tissue."
                 </p>
               </div>
               <div className="flex gap-4 items-start">
-                <span className="text-2xl">💡</span>
+                <span className="text-sage mt-1">
+                  <Lightbulb size={24} strokeWidth={1.5} />
+                </span>
                 <p className="text-charcoal font-serif italic text-lg leading-relaxed">
                   "As the Founder and CEO of Eccopulps, Mr. Abhishek Bhakat is not just building a business; he is leading a movement toward a greener future."
                 </p>
               </div>
 
               <div className="flex items-start gap-4">
-                <span className="text-3xl mt-1 drop-shadow-sm">🌱</span>
+                <span className="text-sage mt-1">
+                  <Sprout size={24} strokeWidth={1.5} />
+                </span>
                 <p className="text-charcoal font-serif italic text-lg leading-relaxed">
                   "Under the leadership of Mr. Abhishek Bhakat, Eccopulps is turning eco-consciousness into action — one biodegradable product at a time."
                 </p>
               </div>
 
               <div className="flex items-start gap-4">
-                <span className="text-3xl mt-1 drop-shadow-sm">🌍</span>
+                <span className="text-sage mt-1">
+                  <Globe size={24} strokeWidth={1.5} />
+                </span>
                 <p className="text-charcoal font-serif italic text-lg leading-relaxed">
                   "With Eccopulps, Mr. Abhishek Bhakat proves that business success and environmental responsibility can go hand in hand."
                 </p>

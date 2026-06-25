@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import img1 from "../assets/productone.jpeg";
 import img2 from "../assets/producttwo.jpeg";
 import img3 from "../assets/productthree.jpeg";
+import { Leaf, FlaskConical, Droplet, Baby, Cross, ShieldCheck } from "lucide-react";
 
 /* ─────────────────────────────────────────────
    Product Media Carousel
@@ -28,7 +29,7 @@ function ProductMediaCarousel({ image, video, name, bgColor }) {
   useEffect(() => {
     if (!videoRef.current) return;
     if (activeIdx === 0 && video && isInView) {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
     } else {
       videoRef.current.pause();
     }
@@ -155,7 +156,7 @@ function HeroMediaCarousel({ image, video, name }) {
   useEffect(() => {
     if (!videoRef.current) return;
     if (activeIdx === 0 && video && isInView) {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
     } else {
       videoRef.current.pause();
     }
@@ -359,163 +360,163 @@ function Products() {
 
   return (
     <>
-    <section
-      id="products"
-      ref={containerRef}
-      className="relative w-full h-[100dvh] overflow-hidden"
-      style={{ willChange: "transform" }}
-    >
-      {productPanels.map((product, index) => (
-        <div
-          key={product.id}
-          ref={(el) => (panelRefs.current[index] = el)}
-          className="absolute inset-0 w-full h-full"
-          style={{
-            zIndex: index + 1,
-            willChange: "transform",
-            transform: "translateZ(0)",
-          }}
-        >
-          {/* ─── HERO PANEL (Bamboo) ─── */}
-          {product.isHero ? (
-            <div
-              className="w-full h-full flex items-center justify-center relative overflow-hidden"
-              style={{
-                background: "linear-gradient(135deg, var(--color-forest) 0%, var(--color-forest-light) 40%, var(--color-forest) 100%)",
-              }}
-            >
-              {/* Floating bamboo leaf pattern */}
-              <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
-                <svg className="w-full h-full" viewBox="0 0 800 600" fill="currentColor">
-                  <ellipse cx="80" cy="80" rx="22" ry="70" transform="rotate(-20 80 80)" />
-                  <ellipse cx="140" cy="140" rx="18" ry="60" transform="rotate(15 140 140)" />
-                  <ellipse cx="720" cy="70" rx="20" ry="65" transform="rotate(-25 720 70)" />
-                  <ellipse cx="680" cy="520" rx="18" ry="55" transform="rotate(10 680 520)" />
-                  <ellipse cx="400" cy="560" rx="16" ry="50" transform="rotate(-10 400 560)" />
-                </svg>
-              </div>
-
-              <div className="max-w-6xl mx-auto px-4 md:px-12 w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-14 items-center relative z-10">
-                {/* Left — Hero Image with carousel */}
-                <div className="flex justify-center order-2 md:order-1">
-                  <HeroMediaCarousel
-                    image={product.image}
-                    video={product.video}
-                    name={product.name}
-                  />
+      <section
+        id="products"
+        ref={containerRef}
+        className="relative w-full h-[100dvh] overflow-hidden"
+        style={{ willChange: "transform" }}
+      >
+        {productPanels.map((product, index) => (
+          <div
+            key={product.id}
+            ref={(el) => (panelRefs.current[index] = el)}
+            className="absolute inset-0 w-full h-full"
+            style={{
+              zIndex: index + 1,
+              willChange: "transform",
+              transform: "translateZ(0)",
+            }}
+          >
+            {/* ─── HERO PANEL (Bamboo) ─── */}
+            {product.isHero ? (
+              <div
+                className="w-full h-full flex items-center justify-center relative overflow-hidden"
+                style={{
+                  background: "linear-gradient(135deg, var(--color-forest) 0%, var(--color-forest-light) 40%, var(--color-forest) 100%)",
+                }}
+              >
+                {/* Subtle floating bamboo leaf pattern (Original) */}
+                <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
+                  <svg className="w-full h-full" viewBox="0 0 800 600" fill="currentColor">
+                    <ellipse cx="80" cy="80" rx="22" ry="70" transform="rotate(-20 80 80)" />
+                    <ellipse cx="140" cy="140" rx="18" ry="60" transform="rotate(15 140 140)" />
+                    <ellipse cx="720" cy="70" rx="20" ry="65" transform="rotate(-25 720 70)" />
+                    <ellipse cx="680" cy="520" rx="18" ry="55" transform="rotate(10 680 520)" />
+                    <ellipse cx="400" cy="560" rx="16" ry="50" transform="rotate(-10 400 560)" />
+                  </svg>
                 </div>
 
-                {/* Right — Hero Content */}
-                <div className="order-1 md:order-2 text-center md:text-left">
-                  {/* Hero badge */}
-                  <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 rounded-full text-[10px] md:text-[11px] font-sans font-bold tracking-widest uppercase bg-white/10 text-sage-light border border-white/10">
-                    <span className="inline-block w-2 h-2 rounded-full bg-sage-light animate-pulse" />
-                    Our Hero Product
-                  </span>
+                <div className="max-w-6xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-14 items-center relative z-10">
+                  {/* Left — Hero Image */}
+                  <div className="flex justify-center order-2 md:order-1">
+                    <HeroMediaCarousel
+                      image={product.image}
+                      video={product.video}
+                      name={product.name}
+                    />
+                  </div>
 
-                  {/* Title */}
-                  <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-2 md:mb-3 leading-[1.1]">
-                    Bamboo
-                    <br />
-                    <span style={{ color: "var(--color-sage)" }}>Facial Tissue</span>
-                  </h2>
+                  {/* Right — Hero Content */}
+                  <div className="order-1 md:order-2 text-center md:text-left">
+                    {/* Premium Badge */}
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-5 rounded-full text-[10px] md:text-[11px] font-sans font-bold tracking-widest uppercase bg-white/5 text-sage-light border border-white/10">
+                      <span className="inline-block w-1.5 h-1.5 rounded-full bg-sage-light animate-pulse" />
+                      Our Hero Product
+                    </span>
 
-                  {/* Tagline */}
-                  <p className="text-xs md:text-sm text-white/40 font-sans font-medium tracking-[0.2em] uppercase mb-4 md:mb-5">
-                    Safe · Pure · Natural
-                  </p>
+                    {/* Title */}
+                    <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-white mb-3 md:mb-4 leading-[1.1]">
+                      Bamboo
+                      <br />
+                      <span style={{ color: "var(--color-sage)" }}>Facial Tissue</span>
+                    </h2>
 
-                  {/* Description */}
-                  <p className="text-sm md:text-base text-white/70 leading-relaxed mb-4 md:mb-5 max-w-md font-sans">
-                    Crafted from 100% natural bamboo pulp — unbleached, chemical-free,
-                    and hypoallergenic. Gentle on skin, kind to nature.
-                  </p>
+                    {/* Tagline */}
+                    <p className="text-xs md:text-sm text-white/40 font-sans font-medium tracking-[0.2em] uppercase mb-5 md:mb-6">
+                      Safe · Pure · Natural
+                    </p>
 
-                  {/* Benefit pills */}
-                  <div className="flex flex-wrap gap-1.5 md:gap-2 mb-5 md:mb-6 justify-center md:justify-start">
-                    {[
-                      { icon: "🌿", text: "Eco-Friendly" },
-                      { icon: "🧪", text: "Chemical Free" },
-                      { icon: "🚫", text: "Bleach Free" },
-                      { icon: "🧸", text: "Ultra Soft" },
-                      { icon: "🏥", text: "Medical Safe" },
-                      { icon: "🛡️", text: "Hypoallergenic" },
-                    ].map((pill) => (
-                      <span
-                        key={pill.text}
-                        className="inline-flex items-center gap-1 px-2 md:px-2.5 py-1 rounded-full text-[9px] md:text-[10px] font-sans font-semibold tracking-wide bg-white/8 text-white/80 border border-white/10"
+                    {/* Description */}
+                    <p className="text-sm md:text-base text-white/70 leading-relaxed mb-6 md:mb-8 max-w-md font-sans mx-auto md:mx-0">
+                      Crafted from 100% natural bamboo pulp — unbleached, chemical-free,
+                      and hypoallergenic. Gentle on skin, kind to nature.
+                    </p>
+
+                    {/* Elegant Benefit Tags */}
+                    <div className="flex flex-wrap gap-2 md:gap-2.5 mb-8 md:mb-10 justify-center md:justify-start">
+                      {[
+                        { icon: <Leaf size={12} strokeWidth={2} />, text: "Eco-Friendly" },
+                        { icon: <FlaskConical size={12} strokeWidth={2} />, text: "Chemical Free" },
+                        { icon: <Droplet size={12} strokeWidth={2} />, text: "Unbleached" },
+                        { icon: <Baby size={12} strokeWidth={2} />, text: "Ultra Soft" },
+                        { icon: <Cross size={12} strokeWidth={2} />, text: "Medical Safe" },
+                        { icon: <ShieldCheck size={12} strokeWidth={2} />, text: "Hypoallergenic" },
+                      ].map((pill) => (
+                        <span
+                          key={pill.text}
+                          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-sans font-semibold tracking-wide bg-white/5 text-white/80 border border-white/10 hover:bg-white/10 hover:border-sage/30 hover:text-white transition-all duration-300"
+                        >
+                          <span className="text-sage">{pill.icon}</span>
+                          {pill.text}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* CTA */}
+                    <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+                      <a
+                        href={`https://wa.me/919547163587?text=${encodeURIComponent("Hi! I'm interested in ordering the Premium Bamboo Soft tissues. Could you share more details?")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-kraft text-forest text-xs font-bold tracking-[0.1em] uppercase hover:bg-sage-light transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 no-underline"
                       >
-                        <span className="text-xs">{pill.icon}</span>
-                        {pill.text}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* CTA */}
-                  <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                    <a
-                      href={`https://wa.me/919547163587?text=${encodeURIComponent("Hi! I'm interested in ordering the Premium Bamboo Soft tissues. Could you share more details?")}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 md:px-8 py-3 md:py-3.5 rounded-full bg-[#25D366] text-white text-[10px] md:text-xs font-bold tracking-widest uppercase hover:bg-[#128C7E] transition-all duration-300 shadow-xl hover:shadow-2xl hover:-translate-y-1 no-underline"
-                    >
-                      <WhatsAppIcon size={20} />
-                      Order Now
-                    </a>
+                        <WhatsAppIcon size={20} />
+                        Order Now
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            /* ─── REGULAR PANEL (Products 1 & 2) ─── */
-            <div
-              className="w-full h-full flex items-center justify-center"
-              style={{ backgroundColor: product.bgColor }}
-            >
-              <div className="max-w-6xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
-                {/* Product media */}
-                <div className="flex justify-center md:mb-0 mb-2">
-                  <ProductMediaCarousel
-                    image={product.image}
-                    video={product.video}
-                    name={product.name}
-                    bgColor={product.bgColor}
-                  />
-                </div>
+            ) : (
+              /* ─── REGULAR PANEL (Products 1 & 2) ─── */
+              <div
+                className="w-full h-full flex items-center justify-center"
+                style={{ backgroundColor: product.bgColor }}
+              >
+                <div className="max-w-6xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12 items-center">
+                  {/* Product media */}
+                  <div className="flex justify-center md:mb-0 mb-2">
+                    <ProductMediaCarousel
+                      image={product.image}
+                      video={product.video}
+                      name={product.name}
+                      bgColor={product.bgColor}
+                    />
+                  </div>
 
-                {/* Product info */}
-                <div className="text-center md:text-left">
-                  <span className="inline-block text-xs font-sans font-semibold tracking-widest uppercase text-sage mb-4">
-                    Our Products
-                  </span>
+                  {/* Product info */}
+                  <div className="text-center md:text-left">
+                    <span className="inline-block text-xs font-sans font-semibold tracking-widest uppercase text-sage mb-4">
+                      Our Products
+                    </span>
 
-                  <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-charcoal mb-4 leading-tight">
-                    {product.name}
-                  </h2>
+                    <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-charcoal mb-4 leading-tight">
+                      {product.name}
+                    </h2>
 
-                  <p className="text-base md:text-lg text-charcoal/80 mb-8 max-w-md leading-relaxed">
-                    {product.description}
-                  </p>
+                    <p className="text-base md:text-lg text-charcoal/80 mb-8 max-w-md leading-relaxed">
+                      {product.description}
+                    </p>
 
-                  {/* CTA */}
-                  <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-                    <a
-                      href={`https://wa.me/919547163587?text=${encodeURIComponent(`Hi! I'm interested in ordering the ${product.name}. Could you share more details?`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-[#25D366] text-white text-xs md:text-sm font-bold tracking-widest uppercase hover:bg-[#128C7E] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 no-underline"
-                    >
-                      <WhatsAppIcon />
-                      Order on WhatsApp
-                    </a>
+                    {/* CTA */}
+                    <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                      <a
+                        href={`https://wa.me/919547163587?text=${encodeURIComponent(`Hi! I'm interested in ordering the ${product.name}. Could you share more details?`)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-[#25D366] text-white text-xs md:text-sm font-bold tracking-widest uppercase hover:bg-[#128C7E] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1 no-underline"
+                      >
+                        <WhatsAppIcon />
+                        Order on WhatsApp
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
-      ))}
-    </section>
+            )}
+          </div>
+        ))}
+      </section>
 
       {/* ═══════════════════════════════════════════════════════════
           BAMBOO TISSUE — "Masterchef Plating" Detail Section
@@ -543,19 +544,19 @@ function Products() {
             {/* 6 benefit icons — clean grid */}
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5 md:gap-6">
               {[
-                { icon: "🌿", line1: "100%", line2: "ECO-FRIENDLY" },
-                { icon: "🧪", line1: "CHEMICAL", line2: "FREE" },
-                { icon: "✋", line1: "BLEACH", line2: "FREE" },
-                { icon: "☁️", line1: "ULTRA", line2: "SOFT" },
-                { icon: "🏥", line1: "BEST FOR", line2: "MEDICAL & KIDS" },
-                { icon: "🛡️", line1: "HYPOALLERGENIC", line2: "TESTED" },
+                { icon: Leaf, line1: "100%", line2: "ECO-FRIENDLY" },
+                { icon: FlaskConical, line1: "CHEMICAL", line2: "FREE" },
+                { icon: Droplet, line1: "BLEACH", line2: "FREE" },
+                { icon: Baby, line1: "ULTRA", line2: "SOFT" },
+                { icon: Cross, line1: "BEST FOR", line2: "MEDICAL & KIDS" },
+                { icon: ShieldCheck, line1: "HYPOALLERGENIC", line2: "TESTED" },
               ].map((item) => (
                 <div
                   key={item.line2}
                   className="group flex flex-col items-center text-center py-8 px-4 rounded-2xl border border-transparent hover:border-kraft/25 hover:bg-white/5 transition-all duration-500 cursor-default"
                 >
-                  <span className="text-3xl md:text-4xl mb-4 group-hover:scale-110 transition-transform duration-500 ease-out">
-                    {item.icon}
+                  <span className="mb-4 text-sage group-hover:scale-110 transition-transform duration-500 ease-out">
+                    <item.icon size={36} strokeWidth={1.5} />
                   </span>
                   <span className="text-[11px] md:text-xs font-sans font-bold tracking-[0.15em] uppercase text-charcoal leading-tight">
                     {item.line1}
@@ -581,8 +582,8 @@ function Products() {
               {/* Card — Bleach Free */}
               <div className="bg-white/5 p-8 md:p-10 flex flex-col group md:border-r md:border-b border-kraft/10">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-xl group-hover:bg-kraft/20 transition-colors duration-300">
-                    ✋
+                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-sage group-hover:bg-kraft/20 transition-colors duration-300">
+                    <Droplet size={24} strokeWidth={1.5} />
                   </div>
                   <h4 className="font-serif text-lg md:text-xl font-semibold text-charcoal">
                     Bleach Free
@@ -596,8 +597,8 @@ function Products() {
               {/* Card — Best for Medical */}
               <div className="bg-white/5 p-8 md:p-10 flex flex-col group md:border-b border-kraft/10">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-xl group-hover:bg-kraft/20 transition-colors duration-300">
-                    🏥
+                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-sage group-hover:bg-kraft/20 transition-colors duration-300">
+                    <Cross size={24} strokeWidth={1.5} />
                   </div>
                   <h4 className="font-serif text-lg md:text-xl font-semibold text-charcoal">
                     Best for Medical
@@ -611,8 +612,8 @@ function Products() {
               {/* Card — Best for Kids */}
               <div className="bg-white/5 p-8 md:p-10 flex flex-col group md:border-r border-kraft/10">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-xl group-hover:bg-kraft/20 transition-colors duration-300">
-                    🧸
+                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-sage group-hover:bg-kraft/20 transition-colors duration-300">
+                    <Baby size={24} strokeWidth={1.5} />
                   </div>
                   <h4 className="font-serif text-lg md:text-xl font-semibold text-charcoal">
                     Best for Kids
@@ -626,8 +627,8 @@ function Products() {
               {/* Card — Hypoallergenic */}
               <div className="bg-white/5 p-8 md:p-10 flex flex-col group">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-xl group-hover:bg-kraft/20 transition-colors duration-300">
-                    🛡️
+                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-sage group-hover:bg-kraft/20 transition-colors duration-300">
+                    <ShieldCheck size={24} strokeWidth={1.5} />
                   </div>
                   <div>
                     <h4 className="font-serif text-lg md:text-xl font-semibold text-charcoal">

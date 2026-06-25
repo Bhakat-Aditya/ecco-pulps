@@ -1,25 +1,26 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Store, Recycle, Cloud, Leaf } from "lucide-react";
 
 const featuresData = [
   {
-    emoji: "🏪",
+    icon: Store,
     title: "Tissue paper Store",
     description: "Locally manufactured with care, supporting eco-conscious communities and businesses.",
   },
   {
-    emoji: "♻️",
+    icon: Recycle,
     title: "Recycled Materials",
     description: "Crafted from 100% recycled and biodegradable paper – good for you, better for the planet.",
   },
   {
-    emoji: "☁️",
+    icon: Cloud,
     title: "Soft & Skin-Friendly",
     description: "Gentle on skin, free from harsh chemicals, perfect for daily use for the whole family.",
   },
   {
-    emoji: "🌱",
+    icon: Leaf,
     title: "Sustainably Made for people",
     description: "Our production process minimizes waste and conserves resources every step of the way.",
   },
@@ -62,7 +63,9 @@ function Features() {
               ref={(el) => (cardsRef.current[index] = el)}
               className="bg-forest-light/80 md:bg-forest-light/40 md:backdrop-blur-sm border border-kraft/20 p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="text-4xl mb-6">{feature.emoji}</div>
+              <div className="mb-6 text-sage">
+                <feature.icon size={36} strokeWidth={1.5} />
+              </div>
               <h3 className="font-serif text-2xl font-semibold text-charcoal mb-4">
                 {feature.title}
               </h3>

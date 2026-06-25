@@ -58,7 +58,7 @@ function Marquee() {
       {/* Top Row: Large, solid cream text */}
       <div
         ref={row1Ref}
-        className="whitespace-nowrap font-serif text-5xl md:text-7xl lg:text-8xl font-medium text-charcoal select-none"
+        className="whitespace-nowrap font-serif text-3xl md:text-5xl lg:text-6xl font-medium text-charcoal select-none"
         style={{ willChange: "transform", display: "inline-block" }}
       >
         {repeatedText}
@@ -67,7 +67,7 @@ function Marquee() {
       {/* Bottom Row: Smaller, slightly faded text */}
       <div
         ref={row2Ref}
-        className="whitespace-nowrap font-serif text-3xl md:text-5xl lg:text-6xl font-medium text-sage select-none"
+        className="whitespace-nowrap font-serif text-xl md:text-3xl lg:text-4xl font-medium text-sage select-none"
         style={{ willChange: "transform", display: "inline-block" }}
       >
         {repeatedText}
