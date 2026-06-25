@@ -135,16 +135,16 @@ function ReviewCard({ review, setKey }) {
       className="w-[300px] md:w-[350px] flex-shrink-0 mx-3 bg-white/5 border border-white/10 rounded-2xl p-7 transition-colors duration-300 hover:bg-white/10"
     >
       <FiveStars />
-      <p className="text-cream/85 text-sm md:text-[15px] leading-relaxed mb-6">
+      <p className="text-charcoal/85 text-sm md:text-[15px] leading-relaxed mb-6">
         "{review.text}"
       </p>
       <div className="flex items-center gap-3">
         {/* Avatar with initials */}
-        <div className="w-9 h-9 rounded-full bg-sage/30 flex items-center justify-center text-[11px] font-sans font-bold text-cream tracking-wide">
+        <div className="w-9 h-9 rounded-full bg-sage/30 flex items-center justify-center text-[11px] font-sans font-bold text-charcoal tracking-wide">
           {initials}
         </div>
         <div>
-          <h4 className="font-serif font-medium text-base text-cream leading-tight">
+          <h4 className="font-serif font-medium text-base text-charcoal leading-tight">
             {review.name}
           </h4>
           <p className="text-[11px] text-sage-light/60 font-sans">
@@ -185,7 +185,7 @@ function Testimonials() {
   }, []);
 
   return (
-    <section className="py-24 bg-forest text-cream overflow-hidden">
+    <section className="py-24 bg-forest text-charcoal overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 mb-16 text-center" ref={headingRef}>
         <span className="inline-block text-xs font-sans font-semibold tracking-widest uppercase text-sage-light mb-4">
           Testimonials
@@ -193,7 +193,7 @@ function Testimonials() {
         <h2 className="font-serif text-4xl md:text-5xl font-medium mb-4">
           What Our Customers Say
         </h2>
-        <p className="text-cream/60 text-base md:text-lg font-sans">
+        <p className="text-charcoal/60 text-base md:text-lg font-sans">
           Real reviews from real people — all 5-star ratings on Google
         </p>
       </div>

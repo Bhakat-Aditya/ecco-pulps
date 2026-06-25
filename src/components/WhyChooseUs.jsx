@@ -78,7 +78,7 @@ function WhyChooseUs() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-forest text-cream overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-forest text-charcoal overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-block text-xs font-sans font-semibold tracking-widest uppercase text-sage-light mb-4">
@@ -87,7 +87,7 @@ function WhyChooseUs() {
           <h2 className="font-serif text-4xl md:text-5xl font-medium mb-6">
             Because Every Choice Matters
           </h2>
-          <p className="text-lg text-cream/80 leading-relaxed">
+          <p className="text-lg text-charcoal/80 leading-relaxed">
             Ecco Pulps offers eco-friendly tissue products made from 100% recycled materials. They’re soft, skin-safe, chemical-free, and sustainably produced — proudly made in India for a cleaner tomorrow.
           </p>
         </div>
@@ -97,7 +97,7 @@ function WhyChooseUs() {
             <div
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center transition-all duration-300 hover:bg-white/10"
+              className="bg-white/10 md:bg-white/5 md:backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center transition-all duration-300 hover:bg-white/10"
             >
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-sage/20 text-sage-light mb-6">
                 {reason.icon}
@@ -105,7 +105,7 @@ function WhyChooseUs() {
               <h3 className="font-serif text-2xl font-medium text-white mb-4">
                 {reason.title}
               </h3>
-              <p className="text-cream/80 leading-relaxed">
+              <p className="text-charcoal/80 leading-relaxed">
                 {reason.description}
               </p>
             </div>

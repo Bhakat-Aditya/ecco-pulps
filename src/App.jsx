@@ -20,8 +20,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 function App() {
   useEffect(() => {
+    // Prevent mobile address bar show/hide from constantly triggering recalculations
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    
     // Refresh ScrollTrigger after all components have mounted
-    // This ensures accurate measurements for pinned sections
     ScrollTrigger.refresh();
   }, []);
 

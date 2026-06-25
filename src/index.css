@@ -9,17 +9,17 @@
    Custom Design Tokens (Tailwind CSS v4)
    ------------------------------------------ */
 @theme {
-  /* Colors — earthy, natural palette */
-  --color-forest: #1a3a2a;
-  --color-forest-light: #264d38;
-  --color-sage: #4a7c59;
-  --color-sage-light: #7fb069;
-  --color-kraft: #c8a96e;
-  --color-kraft-light: #e8d5b0;
-  --color-cream: #faf6f0;
-  --color-cream-dark: #f0e8d8;
-  --color-charcoal: #2c2c2c;
-  --color-charcoal-light: #555555;
+  /* Colors — Light Black & Golden Full Dark Theme */
+  --color-forest: #121212; /* Core dark background */
+  --color-forest-light: #1f1f1f; /* Slightly lighter dark */
+  --color-sage: #c5a059; /* Golden accent */
+  --color-sage-light: #dfc27d; /* Light gold */
+  --color-kraft: #b08d45; /* Rich gold */
+  --color-kraft-light: #eaddb6;
+  --color-cream: #181818; /* Replaces main light bg with dark grey/black */
+  --color-cream-dark: #242424; /* Replaces darker cream */
+  --color-charcoal: #fafafa; /* Replaces dark text with light text */
+  --color-charcoal-light: #a0a0a0; /* Replaces light dark text with grey text */
 
   /* Typography */
   --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;

@@ -58,7 +58,7 @@ function Marquee() {
       {/* Top Row: Large, solid cream text */}
       <div
         ref={row1Ref}
-        className="whitespace-nowrap font-serif text-5xl md:text-7xl lg:text-8xl font-medium text-cream select-none"
+        className="whitespace-nowrap font-serif text-5xl md:text-7xl lg:text-8xl font-medium text-charcoal select-none"
         style={{ willChange: "transform", display: "inline-block" }}
       >
         {repeatedText}

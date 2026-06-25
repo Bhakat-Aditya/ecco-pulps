@@ -93,7 +93,7 @@ function ContactUs() {
       className="relative py-24 md:py-32 overflow-hidden"
       style={{
         background:
-          "linear-gradient(180deg, #faf6f0 0%, #f0e8d8 50%, #e8d5b0 100%)",
+          "linear-gradient(180deg, var(--color-forest) 0%, var(--color-forest-light) 50%, var(--color-forest) 100%)",
       }}
     >
       <div
@@ -111,11 +111,11 @@ function ContactUs() {
             How to Reach Us
           </span>
 
-          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-forest mb-6 leading-tight">
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-charcoal mb-6 leading-tight">
             Let's Get in Touch
           </h2>
 
-          <p className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed" style={{ color: "#555" }}>
+          <p className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-charcoal/80">
             Ready to place an order or have questions? Reach out to us through any of the channels below.
           </p>
         </div>
@@ -128,17 +128,17 @@ function ContactUs() {
               href={channel.href}
               target={channel.id === "whatsapp" ? "_blank" : undefined}
               rel={channel.id === "whatsapp" ? "noopener noreferrer" : undefined}
-              className="group relative block rounded-2xl bg-white/80 backdrop-blur-sm p-8 text-center no-underline transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 border border-white/50 overflow-hidden"
+              className="group relative block rounded-2xl bg-forest-light/95 md:bg-forest-light md:backdrop-blur-sm p-8 text-center no-underline transition-all duration-500 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.5)] hover:-translate-y-2 border border-kraft/10 overflow-hidden"
             >
               <div
                 className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${channel.gradient} opacity-60 group-hover:opacity-100 group-hover:h-2 transition-all duration-300`}
               />
 
-              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-cream mb-5 text-sage group-hover:text-forest group-hover:scale-110 transition-all duration-500">
+              <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-black/30 mb-5 text-sage group-hover:text-kraft group-hover:scale-110 transition-all duration-500">
                 {channel.icon}
               </div>
 
-              <h3 className="font-serif text-xl font-semibold text-forest mb-2">
+              <h3 className="font-serif text-xl font-semibold text-charcoal mb-2">
                 {channel.label}
               </h3>
 

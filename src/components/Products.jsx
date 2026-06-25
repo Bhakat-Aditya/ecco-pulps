@@ -4,8 +4,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import img1 from "../assets/productone.jpeg";
 import img2 from "../assets/producttwo.jpeg";
 import img3 from "../assets/productthree.jpeg";
-import videoSoft from "../assets/premium_soft.webm";
-import videoBamboo from "../assets/bamboo.webm";
 
 /* ─────────────────────────────────────────────
    Product Media Carousel
@@ -13,24 +11,34 @@ import videoBamboo from "../assets/bamboo.webm";
    ───────────────────────────────────────────── */
 function ProductMediaCarousel({ image, video, name, bgColor }) {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [isInView, setIsInView] = useState(false);
   const videoRef = useRef(null);
+  const containerRef = useRef(null);
   const mediaCount = video ? 2 : 1;
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.5 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     if (!videoRef.current) return;
-    if (activeIdx === 1) {
-      videoRef.current.currentTime = 0;
+    if (activeIdx === 0 && video && isInView) {
       videoRef.current.play().catch(() => {});
     } else {
       videoRef.current.pause();
     }
-  }, [activeIdx]);
+  }, [activeIdx, video, isInView]);
 
   return (
-    <div className="relative w-full max-w-[220px] md:max-w-md group">
+    <div ref={containerRef} className="relative w-full max-w-[220px] md:max-w-md group">
       {/* Glow */}
       <div
-        className="absolute -inset-4 -z-10 rounded-3xl opacity-15"
+        className="absolute -inset-4 -z-10 rounded-3xl opacity-15 hidden md:block"
         style={{
           backgroundColor: "#4a7c59",
           boxShadow: "0 0 60px 20px rgba(74, 124, 89, 0.15)",
@@ -38,7 +46,7 @@ function ProductMediaCarousel({ image, video, name, bgColor }) {
       />
 
       {/* Media viewport — 1:1 square frame */}
-      <div className="relative overflow-hidden rounded-2xl shadow-2xl aspect-square">
+      <div className="relative overflow-hidden rounded-2xl shadow-lg md:shadow-2xl aspect-square">
         <div
           className="flex h-full"
           style={{
@@ -47,18 +55,7 @@ function ProductMediaCarousel({ image, video, name, bgColor }) {
             willChange: "transform",
           }}
         >
-          {/* Slide 1 — Image */}
-          <div className="flex-shrink-0 w-full h-full">
-            <img
-              src={image}
-              alt={name}
-              className="w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
-
-          {/* Slide 2 — Video */}
+          {/* Slide 1 — Video */}
           {video && (
             <div
               className="flex-shrink-0 w-full h-full flex items-center justify-center"
@@ -69,24 +66,38 @@ function ProductMediaCarousel({ image, video, name, bgColor }) {
                 src={video}
                 muted
                 playsInline
-                loop
+                onEnded={() => setActiveIdx(1)}
                 preload="metadata"
                 className="w-full h-full object-contain"
               />
             </div>
           )}
+
+          {/* Slide 2 — Image */}
+          <div className="flex-shrink-0 w-full h-full">
+            <img
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         </div>
 
         {/* Tap zones */}
         {mediaCount > 1 && (
           <>
             <button
-              aria-label="View image"
-              onClick={() => setActiveIdx(0)}
+              aria-label="View video"
+              onClick={() => {
+                setActiveIdx(0);
+                if (videoRef.current) videoRef.current.currentTime = 0;
+              }}
               className="absolute inset-y-0 left-0 w-1/3 z-10 cursor-pointer bg-transparent border-none"
             />
             <button
-              aria-label="View video"
+              aria-label="View image"
               onClick={() => setActiveIdx(1)}
               className="absolute inset-y-0 right-0 w-1/3 z-10 cursor-pointer bg-transparent border-none"
             />
@@ -100,8 +111,11 @@ function ProductMediaCarousel({ image, video, name, bgColor }) {
           {[...Array(mediaCount)].map((_, i) => (
             <button
               key={i}
-              aria-label={i === 0 ? "Image" : "Video"}
-              onClick={() => setActiveIdx(i)}
+              aria-label={i === 0 ? "Video" : "Image"}
+              onClick={() => {
+                setActiveIdx(i);
+                if (i === 0 && videoRef.current) videoRef.current.currentTime = 0;
+              }}
               className={`
                 relative rounded-full border-none cursor-pointer transition-all duration-300
                 ${activeIdx === i
@@ -112,7 +126,7 @@ function ProductMediaCarousel({ image, video, name, bgColor }) {
             />
           ))}
           <span className="ml-1.5 text-[10px] tracking-wider uppercase text-charcoal/50 font-sans font-medium select-none">
-            {activeIdx === 1 ? "▶ Video" : ""}
+            {activeIdx === 0 ? "▶ Video" : ""}
           </span>
         </div>
       )}
@@ -125,23 +139,33 @@ function ProductMediaCarousel({ image, video, name, bgColor }) {
    ───────────────────────────────────────────── */
 function HeroMediaCarousel({ image, video, name }) {
   const [activeIdx, setActiveIdx] = useState(0);
+  const [isInView, setIsInView] = useState(false);
   const videoRef = useRef(null);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.5 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!videoRef.current) return;
-    if (activeIdx === 1) {
-      videoRef.current.currentTime = 0;
+    if (activeIdx === 0 && video && isInView) {
       videoRef.current.play().catch(() => {});
     } else {
       videoRef.current.pause();
     }
-  }, [activeIdx]);
+  }, [activeIdx, video, isInView]);
 
   return (
-    <div className="relative w-full max-w-[280px] md:max-w-[380px]">
+    <div ref={containerRef} className="relative w-full max-w-[280px] md:max-w-[380px]">
       {/* Radial glow */}
       <div
-        className="absolute inset-0 -m-10 rounded-full opacity-25 pointer-events-none"
+        className="absolute inset-0 -m-10 rounded-full opacity-25 pointer-events-none hidden md:block"
         style={{
           background: "radial-gradient(circle, rgba(127,176,105,0.4) 0%, transparent 70%)",
         }}
@@ -150,7 +174,7 @@ function HeroMediaCarousel({ image, video, name }) {
       {/* Media frame */}
       <div
         className="relative overflow-hidden rounded-3xl aspect-square"
-        style={{ boxShadow: "0 30px 80px rgba(0,0,0,0.4)" }}
+        style={{ boxShadow: "0 15px 40px rgba(0,0,0,0.3)" }}
       >
         <div
           className="flex h-full"
@@ -160,15 +184,7 @@ function HeroMediaCarousel({ image, video, name }) {
             willChange: "transform",
           }}
         >
-          <div className="flex-shrink-0 w-full h-full">
-            <img
-              src={image}
-              alt={name}
-              className="w-full h-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+          {/* Slide 1 — Video */}
           {video && (
             <div
               className="flex-shrink-0 w-full h-full flex items-center justify-center"
@@ -179,24 +195,38 @@ function HeroMediaCarousel({ image, video, name }) {
                 src={video}
                 muted
                 playsInline
-                loop
+                onEnded={() => setActiveIdx(1)}
                 preload="metadata"
                 className="w-full h-full object-contain"
               />
             </div>
           )}
+
+          {/* Slide 2 — Image */}
+          <div className="flex-shrink-0 w-full h-full">
+            <img
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         </div>
 
         {/* Tap zones */}
         {video && (
           <>
             <button
-              aria-label="View image"
-              onClick={() => setActiveIdx(0)}
+              aria-label="View video"
+              onClick={() => {
+                setActiveIdx(0);
+                if (videoRef.current) videoRef.current.currentTime = 0;
+              }}
               className="absolute inset-y-0 left-0 w-1/3 z-10 cursor-pointer bg-transparent border-none"
             />
             <button
-              aria-label="View video"
+              aria-label="View image"
               onClick={() => setActiveIdx(1)}
               className="absolute inset-y-0 right-0 w-1/3 z-10 cursor-pointer bg-transparent border-none"
             />
@@ -210,8 +240,11 @@ function HeroMediaCarousel({ image, video, name }) {
           {[0, 1].map((i) => (
             <button
               key={i}
-              aria-label={i === 0 ? "Image" : "Video"}
-              onClick={() => setActiveIdx(i)}
+              aria-label={i === 0 ? "Video" : "Image"}
+              onClick={() => {
+                setActiveIdx(i);
+                if (i === 0 && videoRef.current) videoRef.current.currentTime = 0;
+              }}
               className={`
                 rounded-full border-none cursor-pointer transition-all duration-300
                 ${activeIdx === i
@@ -222,15 +255,15 @@ function HeroMediaCarousel({ image, video, name }) {
             />
           ))}
           <span className="ml-1.5 text-[10px] tracking-wider uppercase text-white/40 font-sans font-medium select-none">
-            {activeIdx === 1 ? "▶ Video" : ""}
+            {activeIdx === 0 ? "▶ Video" : ""}
           </span>
         </div>
       )}
 
       {/* Floating badge */}
       <div className="absolute -bottom-3 -right-3 md:-bottom-5 md:-right-5 bg-white rounded-2xl px-4 py-2.5 shadow-xl z-20">
-        <div className="text-[9px] font-sans font-bold tracking-widest uppercase text-sage mb-0.5">50 Pulls</div>
-        <div className="text-[11px] font-sans font-bold text-forest">4 Packs Combo</div>
+        <div className="text-[9px] font-sans font-bold tracking-widest uppercase text-sage mb-0.5">40 Pulls</div>
+        <div className="text-[11px] font-sans font-bold text-charcoal">4 Packs Combo</div>
       </div>
     </div>
   );
@@ -255,8 +288,8 @@ const productPanels = [
     description:
       "Ultra-soft, dermatologist-tested tissues made from 100% recycled fibres. Gentle enough for everyday use.",
     image: img1,
-    video: videoSoft,
-    bgColor: "#faf6f0",
+    video: "https://res.cloudinary.com/adityabhakat/video/upload/v1782353798/premium_soft_ztm6hk.webm",
+    bgColor: "var(--color-forest-light)",
     isHero: false,
   },
   {
@@ -266,7 +299,7 @@ const productPanels = [
       "Strong, highly absorbent tissues designed for durability and tougher cleaning tasks while remaining sustainable.",
     image: img2,
     video: null,
-    bgColor: "#f0e8d8",
+    bgColor: "var(--color-forest)",
     isHero: false,
   },
   {
@@ -275,8 +308,8 @@ const productPanels = [
     description:
       "Eco-friendly bamboo tissues that are exceptionally soft, strong, and highly sustainable for daily use.",
     image: img3,
-    video: videoBamboo,
-    bgColor: "#dfe8d4",
+    video: "https://res.cloudinary.com/adityabhakat/video/upload/v1782353799/bamboo_ffnbls.webm",
+    bgColor: "var(--color-forest-light)",
     isHero: true,
   },
 ];
@@ -348,7 +381,7 @@ function Products() {
             <div
               className="w-full h-full flex items-center justify-center relative overflow-hidden"
               style={{
-                background: "linear-gradient(135deg, #1a3a2a 0%, #264d38 40%, #2d6a4f 100%)",
+                background: "linear-gradient(135deg, var(--color-forest) 0%, var(--color-forest-light) 40%, var(--color-forest) 100%)",
               }}
             >
               {/* Floating bamboo leaf pattern */}
@@ -384,7 +417,7 @@ function Products() {
                   <h2 className="font-serif text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-2 md:mb-3 leading-[1.1]">
                     Bamboo
                     <br />
-                    <span style={{ color: "#7fb069" }}>Facial Tissue</span>
+                    <span style={{ color: "var(--color-sage)" }}>Facial Tissue</span>
                   </h2>
 
                   {/* Tagline */}
@@ -456,7 +489,7 @@ function Products() {
                     Our Products
                   </span>
 
-                  <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-forest mb-4 leading-tight">
+                  <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-medium text-charcoal mb-4 leading-tight">
                     {product.name}
                   </h2>
 
@@ -491,9 +524,8 @@ function Products() {
       <section id="bamboo-details" className="relative w-full overflow-hidden">
 
         {/* ── PLATE 1: Hero Benefits Strip ──
-            Six icon badges on a warm off-white surface,
-            like garnishes arranged with tweezers */}
-        <div style={{ backgroundColor: "#f7f5ef" }}>
+            Six icon badges on a dark surface */}
+        <div style={{ backgroundColor: "var(--color-forest)" }}>
           {/* Top accent line */}
           <div className="w-full h-px" style={{ background: "linear-gradient(90deg, transparent 10%, #c8a96e 50%, transparent 90%)" }} />
 
@@ -503,7 +535,7 @@ function Products() {
               <p className="text-[11px] md:text-xs font-sans font-bold tracking-[0.3em] uppercase text-kraft mb-3">
                 Why Choose Bamboo
               </p>
-              <h2 className="font-serif text-3xl md:text-5xl font-medium text-forest leading-tight">
+              <h2 className="font-serif text-3xl md:text-5xl font-medium text-charcoal leading-tight">
                 Safe · Pure · Natural
               </h2>
             </div>
@@ -520,12 +552,12 @@ function Products() {
               ].map((item) => (
                 <div
                   key={item.line2}
-                  className="group flex flex-col items-center text-center py-8 px-4 rounded-2xl border border-transparent hover:border-kraft/25 hover:bg-white/60 transition-all duration-500 cursor-default"
+                  className="group flex flex-col items-center text-center py-8 px-4 rounded-2xl border border-transparent hover:border-kraft/25 hover:bg-white/5 transition-all duration-500 cursor-default"
                 >
                   <span className="text-3xl md:text-4xl mb-4 group-hover:scale-110 transition-transform duration-500 ease-out">
                     {item.icon}
                   </span>
-                  <span className="text-[11px] md:text-xs font-sans font-bold tracking-[0.15em] uppercase text-forest leading-tight">
+                  <span className="text-[11px] md:text-xs font-sans font-bold tracking-[0.15em] uppercase text-charcoal leading-tight">
                     {item.line1}
                   </span>
                   <span className="text-[10px] md:text-[11px] font-sans font-semibold tracking-[0.12em] uppercase text-charcoal/50 mt-0.5">
@@ -541,72 +573,72 @@ function Products() {
             Four cards, each a focused "course" of information */}
         <div
           style={{
-            background: "linear-gradient(180deg, #f7f5ef 0%, #faf8f2 40%, #fdfcf9 100%)",
+            background: "linear-gradient(180deg, var(--color-forest) 0%, var(--color-forest-light) 100%)",
           }}
         >
           <div className="max-w-5xl mx-auto px-6 md:px-12 py-14 md:py-20">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-px md:gap-0 rounded-3xl overflow-hidden border border-kraft/15 bg-kraft/10">
               {/* Card — Bleach Free */}
-              <div className="bg-white p-8 md:p-10 flex flex-col group md:border-r md:border-b border-kraft/10">
+              <div className="bg-white/5 p-8 md:p-10 flex flex-col group md:border-r md:border-b border-kraft/10">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-forest/5 flex items-center justify-center text-xl group-hover:bg-forest/10 transition-colors duration-300">
+                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-xl group-hover:bg-kraft/20 transition-colors duration-300">
                     ✋
                   </div>
-                  <h4 className="font-serif text-lg md:text-xl font-semibold text-forest">
+                  <h4 className="font-serif text-lg md:text-xl font-semibold text-charcoal">
                     Bleach Free
                   </h4>
                 </div>
-                <p className="text-sm text-charcoal/65 leading-relaxed font-sans flex-1">
+                <p className="text-sm text-charcoal/80 leading-relaxed font-sans flex-1">
                   No harmful chemicals. Our bamboo tissues are completely unbleached and natural — keeping your skin free from irritants.
                 </p>
               </div>
 
               {/* Card — Best for Medical */}
-              <div className="bg-white p-8 md:p-10 flex flex-col group md:border-b border-kraft/10">
+              <div className="bg-white/5 p-8 md:p-10 flex flex-col group md:border-b border-kraft/10">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-forest/5 flex items-center justify-center text-xl group-hover:bg-forest/10 transition-colors duration-300">
+                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-xl group-hover:bg-kraft/20 transition-colors duration-300">
                     🏥
                   </div>
-                  <h4 className="font-serif text-lg md:text-xl font-semibold text-forest">
+                  <h4 className="font-serif text-lg md:text-xl font-semibold text-charcoal">
                     Best for Medical
                   </h4>
                 </div>
-                <p className="text-sm text-charcoal/65 leading-relaxed font-sans flex-1">
+                <p className="text-sm text-charcoal/80 leading-relaxed font-sans flex-1">
                   Gentle & hygienic. Soft, safe & gentle for patient care — ideal for hospitals, clinics, and sensitive medical environments.
                 </p>
               </div>
 
               {/* Card — Best for Kids */}
-              <div className="bg-white p-8 md:p-10 flex flex-col group md:border-r border-kraft/10">
+              <div className="bg-white/5 p-8 md:p-10 flex flex-col group md:border-r border-kraft/10">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-forest/5 flex items-center justify-center text-xl group-hover:bg-forest/10 transition-colors duration-300">
+                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-xl group-hover:bg-kraft/20 transition-colors duration-300">
                     🧸
                   </div>
-                  <h4 className="font-serif text-lg md:text-xl font-semibold text-forest">
+                  <h4 className="font-serif text-lg md:text-xl font-semibold text-charcoal">
                     Best for Kids
                   </h4>
                 </div>
-                <p className="text-sm text-charcoal/65 leading-relaxed font-sans flex-1">
+                <p className="text-sm text-charcoal/80 leading-relaxed font-sans flex-1">
                   Totally safe & natural on sensitive skin. Free from bleach, chemicals, and irritants — the perfect choice for babies and toddlers.
                 </p>
               </div>
 
               {/* Card — Hypoallergenic */}
-              <div className="bg-white p-8 md:p-10 flex flex-col group">
+              <div className="bg-white/5 p-8 md:p-10 flex flex-col group">
                 <div className="flex items-center gap-3 mb-5">
-                  <div className="w-11 h-11 rounded-xl bg-forest/5 flex items-center justify-center text-xl group-hover:bg-forest/10 transition-colors duration-300">
+                  <div className="w-11 h-11 rounded-xl bg-forest-light flex items-center justify-center text-xl group-hover:bg-kraft/20 transition-colors duration-300">
                     🛡️
                   </div>
                   <div>
-                    <h4 className="font-serif text-lg md:text-xl font-semibold text-forest">
+                    <h4 className="font-serif text-lg md:text-xl font-semibold text-charcoal">
                       Hypoallergenic
                     </h4>
-                    <span className="text-[10px] font-sans font-medium tracking-wider uppercase text-charcoal/40">
+                    <span className="text-[10px] font-sans font-medium tracking-wider uppercase text-charcoal/50">
                       Dermatologically Tested
                     </span>
                   </div>
                 </div>
-                <p className="text-sm text-charcoal/65 leading-relaxed font-sans flex-1">
+                <p className="text-sm text-charcoal/80 leading-relaxed font-sans flex-1">
                   Minimizes risk of allergies & irritation. Tested for skin safety by dermatologists — trusted for premium quality.
                 </p>
               </div>
@@ -616,7 +648,7 @@ function Products() {
 
         {/* ── PLATE 3: Product Description ──
             The "main course" — elegant long-form copy */}
-        <div style={{ backgroundColor: "#fdfcf9" }}>
+        <div style={{ backgroundColor: "var(--color-forest-light)" }}>
           <div className="max-w-3xl mx-auto px-6 md:px-12 py-16 md:py-24">
             {/* Ornamental divider */}
             <div className="flex items-center gap-4 mb-12 md:mb-16">
@@ -627,10 +659,10 @@ function Products() {
               <div className="flex-1 h-px bg-kraft/20" />
             </div>
 
-            <div className="space-y-6 text-[15px] md:text-base text-charcoal/75 leading-[1.9] font-sans">
+            <div className="space-y-6 text-[15px] md:text-base text-charcoal/80 leading-[1.9] font-sans">
               <p>
                 Experience the perfect balance of softness, strength, and sustainability with{" "}
-                <strong className="text-forest font-semibold">Ecco Pulps Bamboo Facial Tissue Papers</strong>.
+                <strong className="text-sage font-semibold">Ecco Pulps Bamboo Facial Tissue Papers</strong>.
                 Crafted from 100% natural bamboo pulp, these tissues are unbleached, chemical-free,
                 and hypoallergenic — making them safe and gentle on sensitive skin. Whether you're wiping
                 your face, cleaning up spills, or removing makeup, these tissues deliver superior softness
@@ -648,7 +680,7 @@ function Products() {
               <p>
                 Each bamboo facial tissue box is compact, travel-friendly, and convenient to use — perfect
                 for your home, office desk, car, or handbag. With{" "}
-                <strong className="text-forest font-semibold">50 pulls per pack and 4 packs included</strong>,
+                <strong className="text-charcoal font-semibold">50 pulls per pack and 4 packs included</strong>,
                 this combo ensures long-lasting supply and daily hygiene for the whole family.
               </p>
 
@@ -659,7 +691,7 @@ function Products() {
                 skincare routines.
               </p>
 
-              <p className="text-forest font-medium text-base md:text-lg leading-relaxed">
+              <p className="text-charcoal font-medium text-base md:text-lg leading-relaxed">
                 Choose Ecco Pulps bamboo tissue paper — the eco-conscious way to stay clean, fresh, and
                 protected every day. Gentle on skin, kind to nature, and trusted for premium quality.
               </p>

@@ -56,7 +56,7 @@ function Founder() {
             <span className="inline-block text-xs font-sans font-semibold tracking-widest uppercase text-sage mb-4">
               Meet The Founder
             </span>
-            <h2 className="font-serif text-4xl md:text-5xl font-medium text-forest mb-6">
+            <h2 className="font-serif text-4xl md:text-5xl font-medium text-charcoal mb-6">
               Mr. Abhishek Bhakat
             </h2>
             <p className="text-lg text-charcoal/80 mb-8 leading-relaxed">
@@ -66,25 +66,27 @@ function Founder() {
             <div className="space-y-6">
               <div className="flex gap-4 items-start">
                 <span className="text-2xl">🌿</span>
-                <p className="text-forest font-serif italic text-lg leading-relaxed">
+                <p className="text-charcoal font-serif italic text-lg leading-relaxed">
                   "Mr. Abhishek Bhakat — a visionary entrepreneur and the driving force behind Eccopulps, a brand redefining sustainability with every biodegradable tissue."
                 </p>
               </div>
               <div className="flex gap-4 items-start">
                 <span className="text-2xl">💡</span>
-                <p className="text-forest font-serif italic text-lg leading-relaxed">
-                  "As the Founder and CEO of Eccopulps, Mr. Abhishek Bhakat is not just building a brand — he’s leading a movement towards a cleaner, greener future."
+                <p className="text-charcoal font-serif italic text-lg leading-relaxed">
+                  "As the Founder and CEO of Eccopulps, Mr. Abhishek Bhakat is not just building a business; he is leading a movement toward a greener future."
                 </p>
               </div>
-              <div className="flex gap-4 items-start">
-                <span className="text-2xl">🌱</span>
-                <p className="text-forest font-serif italic text-lg leading-relaxed">
+
+              <div className="flex items-start gap-4">
+                <span className="text-3xl mt-1 drop-shadow-sm">🌱</span>
+                <p className="text-charcoal font-serif italic text-lg leading-relaxed">
                   "Under the leadership of Mr. Abhishek Bhakat, Eccopulps is turning eco-consciousness into action — one biodegradable product at a time."
                 </p>
               </div>
-              <div className="flex gap-4 items-start">
-                <span className="text-2xl">🌏</span>
-                <p className="text-forest font-serif italic text-lg leading-relaxed">
+
+              <div className="flex items-start gap-4">
+                <span className="text-3xl mt-1 drop-shadow-sm">🌍</span>
+                <p className="text-charcoal font-serif italic text-lg leading-relaxed">
                   "With Eccopulps, Mr. Abhishek Bhakat proves that business success and environmental responsibility can go hand in hand."
                 </p>
               </div>

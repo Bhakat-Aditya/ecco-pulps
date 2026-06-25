@@ -60,10 +60,10 @@ function Features() {
             <div
               key={index}
               ref={(el) => (cardsRef.current[index] = el)}
-              className="bg-white/50 backdrop-blur-sm border border-forest/10 p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+              className="bg-forest-light/80 md:bg-forest-light/40 md:backdrop-blur-sm border border-kraft/20 p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
             >
               <div className="text-4xl mb-6">{feature.emoji}</div>
-              <h3 className="font-serif text-2xl font-semibold text-forest mb-4">
+              <h3 className="font-serif text-2xl font-semibold text-charcoal mb-4">
                 {feature.title}
               </h3>
               <p className="text-charcoal/80 leading-relaxed">

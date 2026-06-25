@@ -58,7 +58,7 @@ function Navbar() {
         id="navbar"
         className={`flex items-center justify-between transition-all duration-700 ease-[cubic-bezier(0.76,0,0.24,1)] ${
           isScrolled 
-            ? "w-full max-w-4xl bg-forest/80 backdrop-blur-xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)] border border-white/10 rounded-full py-2.5 px-3 md:px-4 opacity-100 translate-y-0 pointer-events-auto" 
+            ? "w-full max-w-4xl bg-forest/95 md:bg-forest/80 md:backdrop-blur-xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)] border border-white/10 rounded-full py-2.5 px-3 md:px-4 opacity-100 translate-y-0 pointer-events-auto" 
             : "w-full max-w-7xl bg-transparent py-2 px-0 opacity-0 -translate-y-10 md:opacity-100 md:translate-y-0 pointer-events-none md:pointer-events-auto"
         }`}
       >
@@ -68,13 +68,13 @@ function Navbar() {
             <img 
               src={logo} 
               alt="Ecco Pulps Logo" 
-              className={`rounded-full object-cover border border-forest/90 transition-all duration-700 ${
+              className={`rounded-full object-cover border border-sage/50 transition-all duration-700 ${
                 isScrolled ? "h-9 w-9" : "h-12 w-12 md:h-14 md:w-14"
               }`}
             />
           </div>
           <span className={`font-serif font-bold tracking-wide transition-all duration-700 ${
-            isScrolled ? "text-xl text-cream" : "text-2xl md:text-3xl text-[#1A3A2A] drop-shadow-lg"
+            isScrolled ? "text-xl text-charcoal" : "text-2xl md:text-3xl text-charcoal drop-shadow-lg"
           }`}>
             Ecco Pulps
           </span>
@@ -87,12 +87,12 @@ function Navbar() {
               key={item}
               href={`#${item.toLowerCase()}`}
               className={`nav-item relative text-[9px] md:text-xs font-bold tracking-[0.1em] md:tracking-[0.2em] uppercase transition-colors duration-500 no-underline py-2 group overflow-hidden ${
-                isScrolled ? "text-cream hover:text-kraft" : "text-[#1A3A2A]/90 hover:text-[#1A3A2A] drop-shadow-md"
+                isScrolled ? "text-charcoal hover:text-sage" : "text-charcoal/90 hover:text-sage drop-shadow-md"
               }`}
             >
               <span className="relative z-10">{item === "Partner" ? "Partner With Us" : item}</span>
               <span className={`absolute left-0 bottom-0 h-[1.5px] w-full origin-left scale-x-0 transition-transform duration-500 ease-out group-hover:scale-x-100 ${
-                isScrolled ? "bg-kraft" : "bg-[#1A3A2A]"
+                isScrolled ? "bg-sage" : "bg-sage"
               }`}></span>
             </a>
           ))}
